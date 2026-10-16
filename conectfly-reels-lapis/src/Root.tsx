@@ -39,13 +39,13 @@ export const ConectFlyReels: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
       <Pencils />
       <HookText />
-      <SceneSeven a={8.5} out={L.L2.start_s - 0.1} />
-      <SceneSlowSite a={L.L2.start_s - 0.2} q1={L.L2.start_s} q2={l2b} reveal={L.L2.end_s - 0.45} out={L.L3.start_s} />
-      <SceneSites a={L.L3.start_s} cut1={L.L3.start_s + 1.75} cut2={L.L3.start_s + 3.35} out={L.L4.start_s} />
-      <SceneSystems a={L.L4.start_s} cut={L.L4.start_s + 1.9} out={L.L5.start_s} />
-      <SceneApps a={L.L5.start_s} lift={L.L5.start_s + 1.05} s2={L.L5.start_s + 2.0} out={L.L6.start_s} />
-      <SceneCrmAI a={L.L6.start_s} out={L.L7.start_s} />
-      <SceneCTA a={L.L7.start_s - 0.05} brand={L.L7.start_s + 0.4} line2={l7b} out={LOOP_IN + 0.35} />
+      <SceneSeven a={8.5} out={L.L2.start_s - 0.28} />
+      <SceneSlowSite a={L.L2.start_s - 0.28} q1={L.L2.start_s} q2={l2b} reveal={L.L2.end_s - 0.45} out={L.L3.start_s} />
+      <SceneSites a={L.L3.start_s - 0.3} cut1={L.L3.start_s + 1.75} cut2={L.L3.start_s + 3.35} out={L.L4.start_s} />
+      <SceneSystems a={L.L4.start_s - 0.3} cut={L.L4.start_s + 1.9} out={L.L5.start_s} />
+      <SceneApps a={L.L5.start_s - 0.3} lift={L.L5.start_s + 1.05} s2={L.L5.start_s + 2.0} out={L.L6.start_s} />
+      <SceneCrmAI a={L.L6.start_s - 0.3} out={L.L7.start_s} />
+      <SceneCTA a={L.L7.start_s - 0.35} brand={L.L7.start_s + 0.4} line2={l7b} out={LOOP_IN + 0.35} />
       {[L.L3.start_s, L.L4.start_s, L.L5.start_s, L.L6.start_s].map((x) => (
         <Flash key={x} at={x} dur={0.3} max={0.35} />
       ))}

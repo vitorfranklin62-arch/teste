@@ -372,12 +372,13 @@ export const SceneCTA: React.FC<{ a: number; brand: number; line2: number; out: 
   const pulse = 0.5 + 0.5 * Math.sin((t - line2) * 5);
   const streaks = new Array(14).fill(0).map((_, i) => {
     const ang = (i / 14) * Math.PI * 2;
-    const r0 = 1200, r1 = 40;
+    const r0 = 620, r1 = 40; // começam visíveis: sem quadro vazio na entrada do CTA
     const r = lerp(r0, r1, conv);
     return { x: 540 + Math.cos(ang) * r, y: 900 + Math.sin(ang) * r, ang };
   });
   return (
     <div style={{ position: "absolute", inset: 0, opacity: v }}>
+      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at 50% 47%, ${ACCENT}33 0%, rgba(0,0,0,0) ${30 + 25 * conv}%)` }} />
       <svg width={1080} height={1920} style={{ position: "absolute", inset: 0, opacity: 1 - logo * 0.85 }}>
         {streaks.map((s, i) => (
           <line key={i} x1={s.x} y1={s.y} x2={s.x + Math.cos(s.ang) * 260 * (1 - conv)} y2={s.y + Math.sin(s.ang) * 260 * (1 - conv)} stroke={i % 3 ? PAPER : ACCENT} strokeWidth={3} strokeLinecap="round" opacity={0.8} />
