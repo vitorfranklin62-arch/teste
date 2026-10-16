@@ -1,0 +1,160 @@
+{
+  "fps": 30,
+  "duration_s": 35.0,
+  "impact_s": 7.0,
+  "vo_start_s": 8.4,
+  "lines": [
+    {
+      "id": "L1",
+      "text": "Você esperou sete segundos... por dois lápis.",
+      "start_s": 8.4,
+      "end_s": 12.031,
+      "start_frame": 252,
+      "end_frame": 361,
+      "file": "assets/voice/line_1.wav",
+      "captions": [
+        {
+          "text": "Você esperou sete segundos...",
+          "start_s": 8.4,
+          "end_s": 10.586
+        },
+        {
+          "text": "por dois lápis.",
+          "start_s": 10.836,
+          "end_s": 12.031
+        }
+      ]
+    },
+    {
+      "id": "L2",
+      "text": "E o seu cliente? Esperaria tanto por você?",
+      "start_s": 12.231,
+      "end_s": 14.827,
+      "start_frame": 367,
+      "end_frame": 445,
+      "file": "assets/voice/line_2.wav",
+      "captions": [
+        {
+          "text": "E o seu cliente?",
+          "start_s": 12.231,
+          "end_s": 13.057
+        },
+        {
+          "text": "Esperaria tanto por você?",
+          "start_s": 13.307,
+          "end_s": 14.827
+        }
+      ]
+    },
+    {
+      "id": "L3",
+      "text": "Na ConectFly, criamos sites que prendem a atenção... e passam confiança.",
+      "start_s": 15.027,
+      "end_s": 19.839,
+      "start_frame": 451,
+      "end_frame": 595,
+      "file": "assets/voice/line_3.wav",
+      "captions": [
+        {
+          "text": "Na ConectFly, criamos sites",
+          "start_s": 15.027,
+          "end_s": 16.751
+        },
+        {
+          "text": "que prendem a atenção...",
+          "start_s": 16.751,
+          "end_s": 18.284
+        },
+        {
+          "text": "e passam confiança.",
+          "start_s": 18.534,
+          "end_s": 19.839
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "text": "Sistemas inteligentes, feitos sob medida pro seu negócio.",
+      "start_s": 20.039,
+      "end_s": 23.637,
+      "start_frame": 601,
+      "end_frame": 709,
+      "file": "assets/voice/line_4.wav",
+      "captions": [
+        {
+          "text": "Sistemas inteligentes,",
+          "start_s": 20.039,
+          "end_s": 21.452
+        },
+        {
+          "text": "feitos sob medida pro seu negócio.",
+          "start_s": 21.452,
+          "end_s": 23.637
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "text": "Aplicativos que tiram a sua ideia do papel.",
+      "start_s": 23.837,
+      "end_s": 26.627,
+      "start_frame": 715,
+      "end_frame": 799,
+      "file": "assets/voice/line_5.wav",
+      "captions": [
+        {
+          "text": "Aplicativos que tiram",
+          "start_s": 23.837,
+          "end_s": 25.232
+        },
+        {
+          "text": "a sua ideia do papel.",
+          "start_s": 25.232,
+          "end_s": 26.627
+        }
+      ]
+    },
+    {
+      "id": "L6",
+      "text": "CRM e automações com inteligência artificial.",
+      "start_s": 26.827,
+      "end_s": 30.253,
+      "start_frame": 805,
+      "end_frame": 908,
+      "file": "assets/voice/line_6.wav",
+      "captions": [
+        {
+          "text": "CRM e automações",
+          "start_s": 26.827,
+          "end_s": 28.073
+        },
+        {
+          "text": "com inteligência artificial.",
+          "start_s": 28.073,
+          "end_s": 30.253
+        }
+      ]
+    },
+    {
+      "id": "L7",
+      "text": "Fale com a ConectFly. Seu próximo projeto começa aqui.",
+      "start_s": 30.453,
+      "end_s": 34.305,
+      "start_frame": 914,
+      "end_frame": 1029,
+      "file": "assets/voice/line_7.wav",
+      "captions": [
+        {
+          "text": "Fale com a ConectFly.",
+          "start_s": 30.453,
+          "end_s": 31.902
+        },
+        {
+          "text": "Seu próximo projeto começa aqui.",
+          "start_s": 32.152,
+          "end_s": 34.305
+        }
+      ]
+    }
+  ]
+}

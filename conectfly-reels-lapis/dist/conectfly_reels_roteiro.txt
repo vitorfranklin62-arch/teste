@@ -1,0 +1,62 @@
+CONECTFLY — REELS "OS DOIS LÁPIS"
+Roteiro final · 35 s · 1080×1920 · 30 fps
+Locução: ElevenLabs v4 · voz "Thales" (pt-BR) · tags de interpretação entre colchetes (não são faladas)
+
+00.00–07.00  01 · GANCHO (sem locução)
+  Imagem: dois lápis hiper-realistas (3D), ponta contra ponta, fundo preto, macro com aproximação quase
+          imperceptível, microvibração e poeira em suspensão. O vão diminui sem nunca fechar… até 7,0 s.
+  Texto (1,2 s): "Só mais um segundo..."
+  Som: ambiência de tensão muito baixa, tique-taque e batida de coração que acelera; riser nos 2 últimos segundos.
+
+07.00–08.40  02 · PAYOFF
+  Imagem: as pontas se tocam em 7,000 s — flash, onda de choque, fragmentos de grafite, faíscas; linhas de
+          energia nascem do ponto de contato e desenham o esqueleto de uma interface.
+  Som: clique seco de grafite + impacto cinematográfico; silêncio de contraste até a locução.
+
+08.40–12.03  03 · REVELAÇÃO
+  Imagem: o "7" nasce no ponto do contato (match cut), cresce e se encaixa na frase.
+  Texto: "Você esperou 7 segundos por isso."  · cronômetro 00:00:07
+  Locução: [calm, playful] Você esperou sete segundos... por dois lápis.
+
+12.23–14.83  04 · VIRADA COMERCIAL
+  Imagem: cursor numa página lenta e sem graça ("Carregando..."); no clique, uma revelação circular
+          transforma tudo no site real da Farmácia Preço Bom (projeto ConectFly).
+  Texto: "E seu cliente? Esperaria tanto?"
+  Locução: [intriguing] E o seu cliente? Esperaria tanto por você?
+
+15.03–19.84  05 · SITES
+  Imagem: notebook em perspectiva com rolagem real → celular herói (responsivo) → push-in no CTA do WhatsApp.
+  Texto: "SITES QUE IMPRESSIONAM" · "Presença digital pensada para converter"
+  Locução: [confident, warm] Na ConectFly, criamos sites que prendem a atenção... e passam confiança.
+
+20.04–23.64  06 · SISTEMAS
+  Imagem: o site se dissolve e vira o dashboard real do CRM; corte para o kanban de pedidos (telas reais,
+          dados de clientes ocultos).
+  Texto: "SISTEMAS SOB MEDIDA" · "Tecnologia para sua operação"
+  Locução: [clear, professional] Sistemas inteligentes, feitos sob medida pro seu negócio.
+
+23.84–26.63  07 · APLICATIVOS
+  Imagem: um rascunho a lápis no papel (callback do gancho) "sai do papel" e vira um app conceitual no
+          celular 3D, com navegação entre telas. Selo "Conceito ilustrativo".
+  Texto: "APLICATIVOS" · "Sua ideia em movimento"
+  Locução: [inspiring] Aplicativos que tiram a sua ideia do papel.
+
+26.83–30.25  08 · CRM + IA
+  Imagem: mensagem de cliente → IA classifica a etapa → resposta sugerida digitando → fluxo WhatsApp → IA → CRM → Pedidos.
+          Selo "Demonstração · dados fictícios" (tela real do chat ao fundo, desfocada).
+  Texto: "CRM + AUTOMAÇÕES COM IA" · "Mais eficiência no atendimento"
+  Locução: [confident] CRM e automações com inteligência artificial.
+
+30.45–35.00  09 · CTA FINAL
+  Imagem: linhas de energia convergem para a marca ConectFly; botão gráfico de WhatsApp; nos últimos 0,6 s
+          volta ao enquadramento inicial dos lápis (loop).
+  Texto: "Fale com a ConectFly" · "SEU PRÓXIMO PROJETO COMEÇA AQUI" · "WhatsApp (71) 98442-6119"
+  Locução: [deep, confident] Fale com a ConectFly. [warmly] Seu próximo projeto começa aqui.
+  Som: acorde aberto e assinatura sonora curta (Ré–Lá–Fá♯–Ré).
+
+MUDANÇAS DE COPY EM RELAÇÃO À BRIEFING (pequenos ajustes)
+  • "Seu cliente esperaria tanto para encontrar você?" → "E o seu cliente? Esperaria tanto por você?" (mais curta, cabe em 3 s)
+  • "…sites profissionais que conquistam atenção e inspiram confiança" → "…sites que prendem a atenção... e passam confiança" (conversa com o gancho)
+  • "Desenvolvemos sistemas inteligentes, construídos para o seu negócio" → "Sistemas inteligentes, feitos sob medida pro seu negócio"
+  • "Aplicativos que transformam ideias em experiências" → "Aplicativos que tiram a sua ideia do papel" (callback dos lápis)
+  • "E automações com inteligência artificial para ganhar tempo" → "CRM e automações com inteligência artificial"
