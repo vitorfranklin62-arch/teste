@@ -75,24 +75,30 @@ const Pencils: React.FC<{ t: number }> = ({ t }) => {
   );
 };
 
-/** Poeira em suspensão: partículas próximas fora de foco (bokeh) e distantes, iluminadas. */
+/** Poeira em suspensão: um único sistema de pontos (perto da lente = grande e difuso). */
 const Dust: React.FC<{ t: number; fade: number }> = ({ t, fade }) => {
-  const pts = useMemo(() => {
+  const data = useMemo(() => {
     const r = rand(9);
-    return new Array(70).fill(0).map(() => ({ x: (r() - 0.5) * 60, y: (r() - 0.5) * 90, z: -40 + r() * 70, s: 0.15 + r() * 0.5, vx: (r() - 0.5) * 0.25, vy: 0.15 + r() * 0.35, ph: r() * 6 }));
+    return new Array(70).fill(0).map(() => ({ x: (r() - 0.5) * 60, y: (r() - 0.5) * 90, z: -40 + r() * 70, vx: (r() - 0.5) * 0.25, vy: 0.15 + r() * 0.35, ph: r() * 6, accent: r() < 0.14 }));
   }, []);
+  const geo = useMemo(() => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(data.length * 3), 3));
+    const col = new Float32Array(data.length * 3);
+    data.forEach((p, i) => {
+      const c = new THREE.Color(p.accent ? ACCENT : "#cfd6e6").multiplyScalar(p.z > 12 ? 0.12 : 0.35);
+      col.set([c.r, c.g, c.b], i * 3);
+    });
+    g.setAttribute("color", new THREE.BufferAttribute(col, 3));
+    return g;
+  }, [data]);
+  const pos = geo.getAttribute("position") as THREE.BufferAttribute;
+  data.forEach((p, i) => pos.setXYZ(i, p.x + p.vx * t + Math.sin(t * 0.6 + p.ph) * 0.4, ((p.y + p.vy * t + 45) % 90) - 45, p.z));
+  pos.needsUpdate = true;
   return (
-    <group>
-      {pts.map((p, i) => {
-        const near = p.z > 12; // muito perto da lente → grande e difuso
-        const sc = near ? p.s * 6 : p.s;
-        return (
-          <sprite key={i} position={[p.x + p.vx * t + Math.sin(t * 0.6 + p.ph) * 0.4, ((p.y + p.vy * t + 45) % 90) - 45, p.z]} scale={[sc, sc, 1]}>
-            <spriteMaterial map={glow()} color={i % 7 === 0 ? ACCENT : "#cfd6e6"} transparent opacity={(near ? 0.06 : 0.22) * fade} depthWrite={false} blending={THREE.AdditiveBlending} />
-          </sprite>
-        );
-      })}
-    </group>
+    <points geometry={geo}>
+      <pointsMaterial size={0.5} map={glow()} vertexColors transparent opacity={fade} depthWrite={false} blending={THREE.AdditiveBlending} sizeAttenuation />
+    </points>
   );
 };
 
@@ -124,7 +130,31 @@ const Impact: React.FC<{ t: number }> = ({ t }) => {
     rect(-W + 2, -H + 2, W - 2, -6, 0.7);
     return L;
   }, []);
+  const sparkGeo = useMemo(() => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(parts.length * 3), 3));
+    g.setAttribute("color", new THREE.BufferAttribute(new Float32Array(parts.length * 3), 3));
+    return g;
+  }, [parts]);
+  const dustGeo = useMemo(() => sparkGeo.clone(), [sparkGeo]);
   if (since < 0 || since > 2.2) return null;
+  // posições/cores por frame (arrasto + gravidade no pó); cor escurece até sumir (fade sem material por partícula)
+  for (const [geoX, wantSpark] of [[sparkGeo, true], [dustGeo, false]] as const) {
+    const P = geoX.getAttribute("position") as THREE.BufferAttribute;
+    const Cc = geoX.getAttribute("color") as THREE.BufferAttribute;
+    parts.forEach((p, i) => {
+      const tt = Math.min(since, p.life);
+      const drag = 3.2;
+      const f = (1 - Math.exp(-drag * tt)) / drag;
+      const alive = p.spark === wantSpark ? Math.max(0, 1 - since / p.life) : 0;
+      if (alive > 0) P.setXYZ(i, p.vx * f, p.vy * f - (p.spark ? 0 : 2.2 * tt * tt), p.vz * f);
+      else P.setXYZ(i, 0, 1e5, 0); // partícula morta: fora do quadro
+      const c = new THREE.Color(p.spark ? (i % 3 ? "#ffffff" : ACCENT) : "#8d939c").multiplyScalar(alive);
+      Cc.setXYZ(i, c.r, c.g, c.b);
+    });
+    P.needsUpdate = true;
+    Cc.needsUpdate = true;
+  }
   const flash = Math.exp(-since * 9);
   const ring = clamp01(since / 0.7);
   const linesK = clamp01((since - 0.12) / 1.1);
@@ -149,19 +179,12 @@ const Impact: React.FC<{ t: number }> = ({ t }) => {
         <torusGeometry args={[1, 0.012, 8, 160]} />
         <meshBasicMaterial color={ACCENT} transparent opacity={(1 - ring) * 0.9} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
-      {parts.map((p, i) => {
-        const tt = Math.min(since, p.life);
-        const drag = 3.2;
-        const f = (1 - Math.exp(-drag * tt)) / drag;
-        const x = p.vx * f, y = p.vy * f - (p.spark ? 0 : 2.2 * tt * tt), z = p.vz * f;
-        const a = 1 - clamp01(since / p.life);
-        if (a <= 0) return null;
-        return (
-          <sprite key={i} position={[x, y, z]} scale={[p.size, p.size, 1]}>
-            <spriteMaterial map={glow()} color={p.spark ? (i % 3 ? "#ffffff" : ACCENT) : "#8d939c"} transparent opacity={a * (p.spark ? 1 : 0.8)} blending={p.spark ? THREE.AdditiveBlending : THREE.NormalBlending} depthWrite={false} />
-          </sprite>
-        );
-      })}
+      <points geometry={sparkGeo}>
+        <pointsMaterial size={0.16} map={glow()} vertexColors transparent depthWrite={false} blending={THREE.AdditiveBlending} sizeAttenuation />
+      </points>
+      <points geometry={dustGeo}>
+        <pointsMaterial size={0.07} map={glow()} vertexColors transparent depthWrite={false} sizeAttenuation />
+      </points>
       {segs.length ? (
         <lineSegments geometry={lg}>
           <lineBasicMaterial color={ACCENT} transparent opacity={0.95 * linesFade} blending={THREE.AdditiveBlending} />

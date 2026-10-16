@@ -46,7 +46,7 @@ export function makePencilGeometry(o: PencilOpts = {}) {
   const bodyLen = o.bodyLen ?? 140;
   const leadR = o.leadR ?? 1.0;
   const tipR = o.tipR ?? 0.16;
-  const SEG = o.seg ?? 288;
+  const SEG = o.seg ?? 160;
   const corner = a / Math.cos(Math.PI / 6);
   const coneMax = corner * 1.015; // o cone passa um pouco dos cantos → borda recortada
 
@@ -65,9 +65,9 @@ export function makePencilGeometry(o: PencilOpts = {}) {
 
   // anéis ao longo do eixo: muito densos na ponta (macro) e espaçados no corpo
   const ys: number[] = [];
-  for (let i = 0; i <= 60; i++) ys.push(Math.pow(i / 60, 2) * 1.2); // 0 → 1,2 mm
-  for (let i = 1; i <= 260; i++) ys.push(1.2 + (i / 260) * (coneLen + 2 - 1.2));
-  for (let i = 1; i <= 40; i++) ys.push(coneLen + 2 + (i / 40) * (bodyLen - coneLen - 2));
+  for (let i = 0; i <= 40; i++) ys.push(Math.pow(i / 40, 2) * 1.2); // 0 → 1,2 mm (ponta: densidade máxima)
+  for (let i = 1; i <= 130; i++) ys.push(1.2 + Math.pow(i / 130, 1.15) * (coneLen + 2 - 1.2));
+  for (let i = 1; i <= 12; i++) ys.push(coneLen + 2 + (i / 12) * (bodyLen - coneLen - 2));
 
   const rows = ys.length;
   const cols = SEG + 1;
