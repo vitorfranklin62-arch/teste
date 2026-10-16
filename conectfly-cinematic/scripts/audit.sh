@@ -19,11 +19,11 @@ check() { # arquivo largura altura duração_esperada
   echo "- Vídeo: \`$v\`" >> "$REPORT"
   echo "- Áudio: \`$a\`" >> "$REPORT"
   local vw vh vr vd ad
-  vw=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$f")
-  vh=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$f")
-  vr=$(ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of csv=p=0 "$f")
-  vd=$(ffprobe -v error -select_streams v:0 -show_entries stream=duration -of csv=p=0 "$f")
-  ad=$(ffprobe -v error -select_streams a:0 -show_entries stream=duration -of csv=p=0 "$f")
+  vw=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$f" | head -1 | tr -d ",")
+  vh=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$f" | head -1 | tr -d ",")
+  vr=$(ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of csv=p=0 "$f" | head -1 | tr -d ",")
+  vd=$(ffprobe -v error -select_streams v:0 -show_entries stream=duration -of csv=p=0 "$f" | head -1 | tr -d ",")
+  ad=$(ffprobe -v error -select_streams a:0 -show_entries stream=duration -of csv=p=0 "$f" | head -1 | tr -d ",")
   [[ "$vw" == "$w" && "$vh" == "$h" ]] && echo "- ✅ Resolução ${vw}×${vh}" >> "$REPORT" || echo "- ❌ Resolução ${vw}×${vh} (esperado ${w}×${h})" >> "$REPORT"
   [[ "$vr" == "30/1" ]] && echo "- ✅ 30 fps constantes" >> "$REPORT" || echo "- ❌ frame rate $vr" >> "$REPORT"
   python3 - "$vd" "$ad" "$d" >> "$REPORT" <<'EOF'

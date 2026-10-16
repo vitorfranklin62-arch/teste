@@ -17,11 +17,12 @@ reais e **FFmpeg** para auditoria.
 | `conectfly_horizontal_fullhd.mp4` | 1920×1080 · 16:9 · 30 fps · 54 s · recomposição própria (não é o vertical esticado) |
 | `conectfly_reels_15s.mp4` | Corte publicitário próprio de 15 s, com edição e CTA próprios |
 | `conectfly_cover.png` | Capa 1080×1920 (assinatura + CTA) |
-| `conectfly_narration.wav` | Locução ElevenLabs v4 (voz Thales) editada na timeline — 2 takes unidos em pausas naturais, sem processamento |
-| `conectfly_soundtrack.wav` | Trilha original (54 s) |
-| `conectfly_final_mix.wav` | Mix master do corte principal (−14 LUFS, < −1 dBTP) |
-| `conectfly_voice_only.wav` · `conectfly_music_only.wav` · `conectfly_sfx_only.wav` | Stems pós-fader (32-bit float) — somados = mix pré-limitador |
-| `conectfly_sfx/` | Os 6 efeitos ElevenLabs |
+| `assets/audio/final/conectfly_narration.wav` | Locução ElevenLabs v4 (voz Thales) editada na timeline — 2 takes unidos em pausas naturais, sem processamento |
+| `assets/audio/final/conectfly_soundtrack.wav` | Trilha original (54 s) |
+| `assets/audio/final/conectfly_final_mix.wav` | Mix master do corte principal (−14 LUFS, < −1 dBTP) |
+| `assets/audio/final/conectfly_{voice,music,sfx}_only.wav` | Stems pós-fader (32-bit float) — somados = mix pré-limitador |
+| `assets/audio/final/conectfly_sfx/` | Os 6 efeitos ElevenLabs |
+| `audit/` | Relatório da auditoria + contact sheets dos MP4 finais |
 | `brand-guidelines.json` | Paleta, gradientes, tipografia, CTA — **provisórios** (ver relatório) |
 | `narration-timeline.json` | Frases e palavras com início/fim em segundos e frames (alinhamento forçado) |
 

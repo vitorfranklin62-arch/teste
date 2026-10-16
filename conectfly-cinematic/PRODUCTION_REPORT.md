@@ -150,7 +150,61 @@ benefícios e Conecte/Automatize/Evolua em 0, +2, +4 semitons) · 06 Brand Revea
 
 ## 10. Auditoria técnica
 
-(preenchida após o render — ver abaixo)
+Todos os arquivos foram verificados **depois da codificação** (MP4 final, AAC decodificado):
+
+| Arquivo | Resolução | FPS | Duração | Loudness | True peak | Pretos | Congelamentos | Tamanho |
+|---|---|---|---|---|---|---|---|---|
+| `conectfly_reels_fullhd.mp4` | 1080×1920 | 30/1 constante | 54,000 s (1620 frames) | −14,1 LUFS | −1,1 dBTP | 0–0,7 s (abertura escura intencional) | nenhum | 44,5 MB · 6,6 Mbps |
+| `conectfly_horizontal_fullhd.mp4` | 1920×1080 | 30/1 constante | 54,000 s (1620 frames) | −14,1 LUFS | −1,1 dBTP | 0–0,7 s (intencional) | nenhum | 39,7 MB · 5,8 Mbps |
+| `conectfly_reels_15s.mp4` | 1080×1920 | 30/1 constante | 15,000 s (450 frames) | −14,1 LUFS | −1,1 dBTP | 0–0,6 s (intencional) | nenhum | 14,5 MB · 7,8 Mbps |
+
+- H.264 High, AAC 48 kHz estéreo 320 kbps. A diferença A/V de ~60 ms é o *padding* final do AAC, não deslocamento de sincronia.
+- `pix_fmt` saiu como `yuvj420p` (faixa completa, por causa dos frames JPEG do Remotion); Instagram e players comuns
+  reproduzem corretamente. Para um master em faixa limitada, rode `--image-format=png` no render.
+- **Inspeção visual:** frames a cada 3 s extraídos dos MP4 finais (`audit/*_contact.jpg`) e conferidos cena a cena:
+  textos dentro das áreas seguras do Reels, sem sobreposições, telas reais carregadas, dados pessoais desfocados,
+  marca sem distorção, CTA legível. Correções feitas durante a produção: caixa escura atrás do wordmark, títulos
+  encostando nas bordas, anéis do portal parados após a travessia, logo duplicada no final, colisões de layout em 16:9.
+
+### Saída do `scripts/audit.sh` — 2026-10-16T16:42:02Z
+
+## conectfly_reels_fullhd
+- Vídeo: `codec_name=h264 profile=High width=1080 height=1920 pix_fmt=yuvj420p r_frame_rate=30/1 avg_frame_rate=30/1 duration=54.000000 bit_rate=6593181 nb_frames=1620 `
+- Áudio: `codec_name=aac sample_rate=48000 channels=2 duration=54.058667 bit_rate=317375 `
+- ✅ Resolução 1080×1920
+- ✅ 30 fps constantes
+- ✅ Duração vídeo 54.000s (alvo 54.0s); áudio 54.059s; diferença A/V 59 ms
+- ⚠️ Trechos escuros: black_start:0 black_end:0.7;
+- ✅ Nenhum congelamento ≥ 1 s
+- Loudness (AAC decodificado): ` I: -14.1 LUFS  LRA: 4.3 LU `
+- astats: `[Parsed_astats_0 @ 0x56030e813f80] Peak level dB: -1.178554`
+- Frames: `audit/conectfly_reels_fullhd/` · contact sheet: `audit/conectfly_reels_fullhd_contact.jpg`
+
+## conectfly_horizontal_fullhd
+- Vídeo: `codec_name=h264 profile=High width=1920 height=1080 pix_fmt=yuvj420p r_frame_rate=30/1 avg_frame_rate=30/1 duration=54.000000 bit_rate=5833705 nb_frames=1620 `
+- Áudio: `codec_name=aac sample_rate=48000 channels=2 duration=54.058667 bit_rate=317375 `
+- ✅ Resolução 1920×1080
+- ✅ 30 fps constantes
+- ✅ Duração vídeo 54.000s (alvo 54.0s); áudio 54.059s; diferença A/V 59 ms
+- ⚠️ Trechos escuros: black_start:0 black_end:0.7;
+- ✅ Nenhum congelamento ≥ 1 s
+- Loudness (AAC decodificado): ` I: -14.1 LUFS  LRA: 4.3 LU `
+- astats: `[Parsed_astats_0 @ 0x55e8862d1e00] Peak level dB: -1.178554`
+- Frames: `audit/conectfly_horizontal_fullhd/` · contact sheet: `audit/conectfly_horizontal_fullhd_contact.jpg`
+
+## conectfly_reels_15s
+- Vídeo: `codec_name=h264 profile=High width=1080 height=1920 pix_fmt=yuvj420p r_frame_rate=30/1 avg_frame_rate=30/1 duration=15.000000 bit_rate=7759794 nb_frames=450 `
+- Áudio: `codec_name=aac sample_rate=48000 channels=2 duration=15.061333 bit_rate=317375 `
+- ✅ Resolução 1080×1920
+- ✅ 30 fps constantes
+- ✅ Duração vídeo 15.000s (alvo 15.0s); áudio 15.061s; diferença A/V 61 ms
+- ⚠️ Trechos escuros: black_start:0 black_end:0.6;
+- ✅ Nenhum congelamento ≥ 1 s
+- Loudness (AAC decodificado): ` I: -14.1 LUFS  LRA: 1.9 LU `
+- astats: `[Parsed_astats_0 @ 0x55f6bd0db580] Peak level dB: -1.238200`
+- Frames: `audit/conectfly_reels_15s/` · contact sheet: `audit/conectfly_reels_15s_contact.jpg`
+
+
 
 ## 11. Consumo de créditos ElevenLabs
 
