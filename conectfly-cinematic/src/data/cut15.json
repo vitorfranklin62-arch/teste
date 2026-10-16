@@ -1,0 +1,26 @@
+{
+  "duration_s": 15,
+  "fps": 30,
+  "segments": [
+    {
+      "src_start": 0,
+      "src_end": 4.053,
+      "at": 0.5
+    },
+    {
+      "src_start": 28.801,
+      "src_end": 36.845,
+      "at": 6.4
+    }
+  ],
+  "markers": {
+    "primeira_palavra": 0.573,
+    "conectfly": 6.54,
+    "conecte": 7.924,
+    "automatize": 9.044,
+    "evolua": 10.404,
+    "futuro": 11.764,
+    "aqui": 13.764,
+    "aqui_end": 14.324
+  }
+}

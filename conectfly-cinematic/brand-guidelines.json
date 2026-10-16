@@ -1,0 +1,45 @@
+{
+  "brand": "ConectFly",
+  "campaign": "CONECTFLY — O FUTURO DO SEU NEGÓCIO COMEÇA AQUI.",
+  "status": "PROVISÓRIO — o site oficial (conectfly-site.vitinhonavoz18.workers.dev) foi bloqueado pela política de rede do ambiente; logo, paleta e tipografia oficiais não puderam ser extraídos. Ver PRODUCTION_REPORT.md.",
+  "official_site": "https://conectfly-site.vitinhonavoz18.workers.dev/",
+  "cta": {
+    "headline": "SOLICITE SEU ORÇAMENTO",
+    "url_display": "conectfly-site.vitinhonavoz18.workers.dev",
+    "url": "https://conectfly-site.vitinhonavoz18.workers.dev/",
+    "note": "Único link oficial conhecido (fornecido na briefing). Substituir pelo link de conversão do site (WhatsApp/formulário) quando a captura for liberada."
+  },
+  "logo": {
+    "official_file": null,
+    "fallback": "wordmark tipográfico 'ConectFly' (Sora ExtraBold + gradiente da paleta) — NÃO é a logo oficial",
+    "how_to_replace": "Salve a logo oficial em public/brand/conectfly_logo_original.png e defina official_file: \"brand/conectfly_logo_original.png\". Todas as composições passam a usá-la."
+  },
+  "palette_source": "Mediana das cores saturadas das 3 imagens de referência enviadas na briefing (assets/references/ref_1..3.jpg).",
+  "palette": {
+    "void": "#04051A",
+    "deep": "#0A0E2E",
+    "surface": "#111842",
+    "cyan": "#38D3EE",
+    "blue": "#3B6FD8",
+    "indigo": "#4F5BE8",
+    "violet": "#7C4DFF",
+    "purple": "#A23BD6",
+    "text": "#F4F6FF",
+    "muted": "#A9B1D6"
+  },
+  "gradients": {
+    "brand": "linear-gradient(100deg, #38D3EE 0%, #4F5BE8 48%, #A23BD6 100%)",
+    "glow": "radial-gradient(circle, rgba(56,211,238,0.55) 0%, rgba(124,77,255,0.25) 40%, rgba(4,5,26,0) 70%)"
+  },
+  "typography": {
+    "display": "Sora (400/600/700/800) — @fontsource/sora, OFL",
+    "body": "Inter (400/500/600) — @fontsource/inter, OFL",
+    "note": "Fontes provisórias até a tipografia oficial do site ser identificada."
+  },
+  "cases_in_brief": ["FlyControl", "CRM Farmácia Preço Bom", "Robson Lopes Cabeleireiro", "Farmácia Preço Bom", "TG Baterias", "Barber Connection"],
+  "cases_with_real_screens": {
+    "Farmácia Preço Bom (site)": "Capturado do repositório SITE-FARMACIA-PRE-O-BOM, build local de produção",
+    "CRM Farmácia Preço Bom": "Capturado do repositório CRM-FARMACIA-PRE-O-BOM — apenas a tela pública de login (painel é privado)"
+  },
+  "services": ["Sites profissionais", "Sistemas inteligentes", "Automações com IA"]
+}

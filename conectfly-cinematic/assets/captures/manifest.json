@@ -1,0 +1,61 @@
+{
+  "captured_at": "2026-10-16T15:02:16.015Z",
+  "items": [
+    {
+      "id": "conectfly_home",
+      "variant": "desktop",
+      "url": "https://conectfly-site.vitinhonavoz18.workers.dev/",
+      "source": "Site oficial ConectFly",
+      "ok": false,
+      "error": "page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://conectfly-site.vitinhonavoz18.workers.dev/"
+    },
+    {
+      "id": "conectfly_home",
+      "variant": "mobile",
+      "url": "https://conectfly-site.vitinhonavoz18.workers.dev/",
+      "source": "Site oficial ConectFly",
+      "ok": false,
+      "error": "page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://conectfly-site.vitinhonavoz18.workers.dev/"
+    },
+    {
+      "id": "farmacia_site",
+      "variant": "desktop",
+      "url": "http://127.0.0.1:3101/",
+      "source": "Repo SITE-FARMACIA-PRE-O-BOM (build local)",
+      "ok": true,
+      "file": "farmacia_site_desktop.png",
+      "full": "farmacia_site_desktop_full.png",
+      "title": "Farmácia Preço Bom — Sete de Abril, Salvador | Delivery e Manipulação"
+    },
+    {
+      "id": "farmacia_site",
+      "variant": "mobile",
+      "url": "http://127.0.0.1:3101/",
+      "source": "Repo SITE-FARMACIA-PRE-O-BOM (build local)",
+      "ok": true,
+      "file": "farmacia_site_mobile.png",
+      "full": "farmacia_site_mobile_full.png",
+      "title": "Farmácia Preço Bom — Sete de Abril, Salvador | Delivery e Manipulação"
+    },
+    {
+      "id": "crm_farmacia_login",
+      "variant": "desktop",
+      "url": "http://127.0.0.1:3102/auth/login",
+      "source": "Repo CRM-FARMACIA-PRE-O-BOM (tela pública de login)",
+      "ok": true,
+      "file": "crm_farmacia_login_desktop.png",
+      "full": "crm_farmacia_login_desktop_full.png",
+      "title": "CRM Farmácia Preço Bom"
+    },
+    {
+      "id": "crm_farmacia_login",
+      "variant": "mobile",
+      "url": "http://127.0.0.1:3102/auth/login",
+      "source": "Repo CRM-FARMACIA-PRE-O-BOM (tela pública de login)",
+      "ok": true,
+      "file": "crm_farmacia_login_mobile.png",
+      "full": "crm_farmacia_login_mobile_full.png",
+      "title": "CRM Farmácia Preço Bom"
+    }
+  ]
+}
