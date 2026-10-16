@@ -5,9 +5,9 @@ import cut from "../data/cut15.json";
 export const FPS = 30;
 export const sec = (s: number) => Math.round(s * FPS);
 
-/** Marcadores do corte de 40 s (segundos na timeline do vídeo, já com o offset da voz). */
-export const M40 = Object.fromEntries(Object.entries(tl.markers).map(([k, v]) => [k, v.start_s])) as Record<keyof typeof tl.markers, number>;
-export const S40 = Object.fromEntries(tl.sentences.map((s) => [s.id, { start: s.start_s, end: s.end_s }])) as Record<string, { start: number; end: number }>;
+/** Marcadores do corte principal (segundos na timeline do vídeo, já com o offset da voz). */
+export const MARK = Object.fromEntries(Object.entries(tl.markers).map(([k, v]) => [k, v.start_s])) as Record<keyof typeof tl.markers, number>;
+export const SENT = Object.fromEntries(tl.sentences.map((s) => [s.id, { start: s.start_s, end: s.end_s }])) as Record<string, { start: number; end: number }>;
 export const M15 = cut.markers;
 
 export const cine = Easing.bezier(0.22, 1, 0.36, 1); // saída suave (cinematográfica)

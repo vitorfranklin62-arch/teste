@@ -45,15 +45,15 @@ EOF
   echo "- astats: \`$clip\`" >> "$REPORT"
   # frames representativos (1 a cada 2 s) + contact sheet
   mkdir -p "$AUD/$name"
-  ffmpeg -v error -y -i "$f" -vf "fps=1/2,scale=-2:540" "$AUD/$name/f_%03d.jpg"
-  ffmpeg -v error -y -pattern_type glob -i "$AUD/$name/f_*.jpg" -vf "tile=$( [[ $w -gt $h ]] && echo 5x4 || echo 10x2 ):padding=4:color=white" -frames:v 1 "$AUD/${name}_contact.jpg"
+  ffmpeg -v error -y -i "$f" -vf "fps=1/3,scale=-2:540" "$AUD/$name/f_%03d.jpg"
+  ffmpeg -v error -y -pattern_type glob -i "$AUD/$name/f_*.jpg" -vf "tile=$( [[ $w -gt $h ]] && echo 6x3 || echo 9x2 ):padding=4:color=white" -frames:v 1 "$AUD/${name}_contact.jpg"
   echo "- Frames: \`$AUD/$name/\` · contact sheet: \`$AUD/${name}_contact.jpg\`" >> "$REPORT"
   echo >> "$REPORT"
 }
 
 echo "# Auditoria audiovisual — $(date -u +%FT%TZ)" >> "$REPORT"
 echo >> "$REPORT"
-check "$OUT/conectfly_reels_fullhd.mp4" 1080 1920 40
-check "$OUT/conectfly_horizontal_fullhd.mp4" 1920 1080 40
+check "$OUT/conectfly_reels_fullhd.mp4" 1080 1920 54
+check "$OUT/conectfly_horizontal_fullhd.mp4" 1920 1080 54
 check "$OUT/conectfly_reels_15s.mp4" 1080 1920 15
 cat "$REPORT"

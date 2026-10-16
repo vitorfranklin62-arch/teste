@@ -13,13 +13,13 @@ reais e **FFmpeg** para auditoria.
 
 | Arquivo | Descrição |
 |---|---|
-| `conectfly_reels_fullhd.mp4` | 1080×1920 · 9:16 · 30 fps · H.264 + AAC · 40 s |
-| `conectfly_horizontal_fullhd.mp4` | 1920×1080 · 16:9 · 30 fps · recomposição própria (não é o vertical esticado) |
+| `conectfly_reels_fullhd.mp4` | 1080×1920 · 9:16 · 30 fps · H.264 + AAC · 54 s (inclui a seção CRM “do simples ao complexo”) |
+| `conectfly_horizontal_fullhd.mp4` | 1920×1080 · 16:9 · 30 fps · 54 s · recomposição própria (não é o vertical esticado) |
 | `conectfly_reels_15s.mp4` | Corte publicitário próprio de 15 s, com edição e CTA próprios |
 | `conectfly_cover.png` | Capa 1080×1920 (assinatura + CTA) |
-| `conectfly_narration.wav` | Locução original ElevenLabs v4 (voz Thales), sem processamento |
-| `conectfly_soundtrack.wav` | Trilha original (40 s) |
-| `conectfly_final_mix.wav` | Mix master do corte de 40 s (−14 LUFS, < −1 dBTP) |
+| `conectfly_narration.wav` | Locução ElevenLabs v4 (voz Thales) editada na timeline — 2 takes unidos em pausas naturais, sem processamento |
+| `conectfly_soundtrack.wav` | Trilha original (54 s) |
+| `conectfly_final_mix.wav` | Mix master do corte principal (−14 LUFS, < −1 dBTP) |
 | `conectfly_voice_only.wav` · `conectfly_music_only.wav` · `conectfly_sfx_only.wav` | Stems pós-fader (32-bit float) — somados = mix pré-limitador |
 | `conectfly_sfx/` | Os 6 efeitos ElevenLabs |
 | `brand-guidelines.json` | Paleta, gradientes, tipografia, CTA — **provisórios** (ver relatório) |
@@ -47,6 +47,7 @@ cp .env.example .env            # opcional: só para gerar áudio pela API diret
 npm run elevenlabs -- --dry-run # valida conta, modelos (eleven_v4), voz e estima uso — sem gastar créditos
 npm run elevenlabs              # gera só o que faltar (cache em assets/audio)
 npm run capture                 # Playwright: site oficial + projetos (ver URLs no topo do script)
+python3 scripts/redact_crm.py <pasta-com-prints>   # telas do CRM: corta o Windows e desfoca dados pessoais (LGPD)
 npm run timeline                # alinhamento → narration-timeline.json + src/data/cut15.json
 npm run soundtrack              # trilha original 40 s e 15 s
 npm run mix                     # stems + masters
@@ -68,13 +69,14 @@ npm run audit                   # ffprobe, pretos, congelamentos, loudness, cont
 
 ```
 src/
-  Root.tsx               composições Reels40 · Horizontal40 · Reels15 (tempos vindos da narração)
+  Root.tsx               composições ReelsMain · HorizontalMain · Reels15 (tempos vindos da narração)
   three/Universe.tsx     universo 3D: estrelas, partícula-semente, portal, núcleo de IA, rede, logo em partículas
-  scenes/scenes.tsx      as 8 cenas + montagem do corte de 15 s (layout recomposto por proporção)
+  scenes/scenes.tsx      cenas principais + montagem do corte de 15 s (layout recomposto por proporção)
+  scenes/crm.tsx         seção CRM: simples → completo, deck de módulos reais, parede “tudo integrado”
   ui/kit.tsx             tipografia cinética, notebook, smartphone, vidro, chips, wordmark, safe areas
   lib/                   marca, fontes locais, tempo/easing
   data/                  narration-timeline.json, cut15.json, brand-guidelines.json, captures.json
-scripts/                 elevenlabs, capture, build-timeline, soundtrack, mix, render, stills, audit
+scripts/                 elevenlabs, capture, redact_crm, build-timeline, soundtrack, mix, render, stills, audit
 assets/                  capturas reais, referências, áudio-fonte, SFX, stems
 ```
 

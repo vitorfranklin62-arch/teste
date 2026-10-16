@@ -20,6 +20,7 @@ for src, box, size, out in [
     elif os.path.exists(f"{c}/{out}"):
         shutil.copy(f"{c}/{out}", f"public/captures/{out}")
 PY
+mkdir -p public/captures/crm_real && cp assets/captures/crm_real/*.png public/captures/crm_real/
 cp assets/references/*.jpg public/references/
 cp assets/audio/final/conectfly_final_mix.wav assets/audio/final/conectfly_15s_final_mix.wav public/audio/
 [ -f assets/brand/conectfly_logo_original.png ] && cp assets/brand/conectfly_logo_original.png public/brand/ || true

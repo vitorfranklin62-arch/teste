@@ -1,12 +1,41 @@
 {
   "generated_by": "scripts/build-timeline.mjs",
-  "source_audio": "assets/audio/source/narration_original.mp3",
-  "alignment": "ElevenLabs Scribe v1 (forced alignment, word level) — assets/audio/source/alignment_words_raw.json",
+  "sources": {
+    "main": {
+      "audio": "assets/audio/source/narration_original.mp3",
+      "align": "assets/audio/source/alignment_words_raw.json",
+      "duration": 36.64
+    },
+    "crm": {
+      "audio": "assets/audio/source/narration_crm.mp3",
+      "align": "assets/audio/source/alignment_crm_words_raw.json",
+      "duration": 12.64
+    }
+  },
+  "alignment": "ElevenLabs Scribe v1 (forced alignment, word level) — um arquivo por take em assets/audio/source/",
   "fps": 30,
-  "voice_offset_s": 0.6,
-  "narration_duration_s": 36.64,
-  "video_duration_s": 40,
-  "video_duration_frames": 1200,
+  "segments": [
+    {
+      "src": "main",
+      "src_start": 0,
+      "src_end": 15.67,
+      "at": 0.6
+    },
+    {
+      "src": "crm",
+      "src_start": 0,
+      "src_end": 12.6,
+      "at": 16.82
+    },
+    {
+      "src": "main",
+      "src_start": 15.67,
+      "src_end": 36.64,
+      "at": 29.87
+    }
+  ],
+  "video_duration_s": 54,
+  "video_duration_frames": 1620,
   "sentences": [
     {
       "id": "L1_abertura",
@@ -182,9 +211,9 @@
       "emotion_tags": "clear, professional",
       "text": "Criamos sites profissionais, sistemas inteligentes e experiências que conectam empresas aos seus clientes.",
       "start_s": 9.885,
-      "end_s": 16.445,
+      "end_s": 16.27,
       "start_frame": 297,
-      "end_frame": 493,
+      "end_frame": 488,
       "words": [
         {
           "text": "Criamos",
@@ -273,9 +302,230 @@
         {
           "text": "clientes.",
           "start_s": 15.765,
-          "end_s": 16.445,
+          "end_s": 16.27,
           "start_frame": 473,
-          "end_frame": 493
+          "end_frame": 488
+        }
+      ]
+    },
+    {
+      "id": "L3b_crm",
+      "emotion_tags": "confident, clear → proud, natural",
+      "text": "Do projeto mais simples ao sistema mais completo. Um CRM com painel em tempo real, chat ao vivo, pedidos, encomendas e campanhas no WhatsApp... tudo integrado, em um só lugar.",
+      "start_s": 16.9,
+      "end_s": 29.42,
+      "start_frame": 507,
+      "end_frame": 883,
+      "words": [
+        {
+          "text": "Do",
+          "start_s": 16.9,
+          "end_s": 16.98,
+          "start_frame": 507,
+          "end_frame": 509
+        },
+        {
+          "text": "projeto",
+          "start_s": 17.1,
+          "end_s": 17.46,
+          "start_frame": 513,
+          "end_frame": 524
+        },
+        {
+          "text": "mais",
+          "start_s": 17.54,
+          "end_s": 17.78,
+          "start_frame": 526,
+          "end_frame": 533
+        },
+        {
+          "text": "simples",
+          "start_s": 17.86,
+          "end_s": 18.42,
+          "start_frame": 536,
+          "end_frame": 553
+        },
+        {
+          "text": "ao",
+          "start_s": 18.5,
+          "end_s": 18.58,
+          "start_frame": 555,
+          "end_frame": 557
+        },
+        {
+          "text": "sistema",
+          "start_s": 18.62,
+          "end_s": 19.14,
+          "start_frame": 559,
+          "end_frame": 574
+        },
+        {
+          "text": "mais",
+          "start_s": 19.22,
+          "end_s": 19.46,
+          "start_frame": 577,
+          "end_frame": 584
+        },
+        {
+          "text": "completo.",
+          "start_s": 19.58,
+          "end_s": 20.3,
+          "start_frame": 587,
+          "end_frame": 609
+        },
+        {
+          "text": "Um",
+          "start_s": 20.66,
+          "end_s": 20.74,
+          "start_frame": 620,
+          "end_frame": 622
+        },
+        {
+          "text": "CRM",
+          "start_s": 20.82,
+          "end_s": 21.46,
+          "start_frame": 625,
+          "end_frame": 644
+        },
+        {
+          "text": "com",
+          "start_s": 21.54,
+          "end_s": 21.62,
+          "start_frame": 646,
+          "end_frame": 649
+        },
+        {
+          "text": "painel",
+          "start_s": 21.7,
+          "end_s": 21.94,
+          "start_frame": 651,
+          "end_frame": 658
+        },
+        {
+          "text": "em",
+          "start_s": 22.02,
+          "end_s": 22.18,
+          "start_frame": 661,
+          "end_frame": 665
+        },
+        {
+          "text": "tempo",
+          "start_s": 22.26,
+          "end_s": 22.42,
+          "start_frame": 668,
+          "end_frame": 673
+        },
+        {
+          "text": "real,",
+          "start_s": 22.5,
+          "end_s": 23.06,
+          "start_frame": 675,
+          "end_frame": 692
+        },
+        {
+          "text": "chat",
+          "start_s": 23.22,
+          "end_s": 23.38,
+          "start_frame": 697,
+          "end_frame": 701
+        },
+        {
+          "text": "ao",
+          "start_s": 23.46,
+          "end_s": 23.54,
+          "start_frame": 704,
+          "end_frame": 706
+        },
+        {
+          "text": "vivo,",
+          "start_s": 23.62,
+          "end_s": 24.1,
+          "start_frame": 709,
+          "end_frame": 723
+        },
+        {
+          "text": "pedidos,",
+          "start_s": 24.26,
+          "end_s": 24.82,
+          "start_frame": 728,
+          "end_frame": 745
+        },
+        {
+          "text": "encomendas",
+          "start_s": 24.9,
+          "end_s": 25.54,
+          "start_frame": 747,
+          "end_frame": 766
+        },
+        {
+          "text": "e",
+          "start_s": 25.58,
+          "end_s": 25.62,
+          "start_frame": 767,
+          "end_frame": 769
+        },
+        {
+          "text": "campanhas",
+          "start_s": 25.74,
+          "end_s": 26.18,
+          "start_frame": 772,
+          "end_frame": 785
+        },
+        {
+          "text": "no",
+          "start_s": 26.22,
+          "end_s": 26.26,
+          "start_frame": 787,
+          "end_frame": 788
+        },
+        {
+          "text": "WhatsApp...",
+          "start_s": 26.54,
+          "end_s": 27.22,
+          "start_frame": 796,
+          "end_frame": 817
+        },
+        {
+          "text": "tudo",
+          "start_s": 27.291,
+          "end_s": 27.46,
+          "start_frame": 819,
+          "end_frame": 824
+        },
+        {
+          "text": "integrado,",
+          "start_s": 27.66,
+          "end_s": 28.26,
+          "start_frame": 830,
+          "end_frame": 848
+        },
+        {
+          "text": "em",
+          "start_s": 28.38,
+          "end_s": 28.5,
+          "start_frame": 851,
+          "end_frame": 855
+        },
+        {
+          "text": "um",
+          "start_s": 28.58,
+          "end_s": 28.66,
+          "start_frame": 857,
+          "end_frame": 860
+        },
+        {
+          "text": "só",
+          "start_s": 28.74,
+          "end_s": 28.82,
+          "start_frame": 862,
+          "end_frame": 865
+        },
+        {
+          "text": "lugar.",
+          "start_s": 28.9,
+          "end_s": 29.42,
+          "start_frame": 867,
+          "end_frame": 883
         }
       ]
     },
@@ -283,115 +533,115 @@
       "id": "L4_ia",
       "emotion_tags": "inspiring, assured",
       "text": "Com inteligência artificial e automações, seu negócio ganha mais organização, agilidade e liberdade para crescer.",
-      "start_s": 16.52,
-      "end_s": 24.045,
-      "start_frame": 496,
-      "end_frame": 721,
+      "start_s": 30.12,
+      "end_s": 37.645,
+      "start_frame": 904,
+      "end_frame": 1129,
       "words": [
         {
           "text": "Com",
-          "start_s": 16.52,
-          "end_s": 16.525,
-          "start_frame": 496,
-          "end_frame": 496
+          "start_s": 30.12,
+          "end_s": 30.125,
+          "start_frame": 904,
+          "end_frame": 904
         },
         {
           "text": "inteligência",
-          "start_s": 16.605,
-          "end_s": 17.165,
-          "start_frame": 498,
-          "end_frame": 515
+          "start_s": 30.205,
+          "end_s": 30.765,
+          "start_frame": 906,
+          "end_frame": 923
         },
         {
           "text": "artificial",
-          "start_s": 17.245,
-          "end_s": 17.885,
-          "start_frame": 517,
-          "end_frame": 537
+          "start_s": 30.845,
+          "end_s": 31.485,
+          "start_frame": 925,
+          "end_frame": 945
         },
         {
           "text": "e",
-          "start_s": 17.925,
-          "end_s": 17.965,
-          "start_frame": 538,
-          "end_frame": 539
+          "start_s": 31.525,
+          "end_s": 31.565,
+          "start_frame": 946,
+          "end_frame": 947
         },
         {
           "text": "automações,",
-          "start_s": 18.085,
-          "end_s": 19.005,
-          "start_frame": 543,
-          "end_frame": 570
+          "start_s": 31.685,
+          "end_s": 32.605,
+          "start_frame": 951,
+          "end_frame": 978
         },
         {
           "text": "seu",
-          "start_s": 19.085,
-          "end_s": 19.205,
-          "start_frame": 573,
-          "end_frame": 576
+          "start_s": 32.685,
+          "end_s": 32.805,
+          "start_frame": 981,
+          "end_frame": 984
         },
         {
           "text": "negócio",
-          "start_s": 19.245,
-          "end_s": 19.645,
-          "start_frame": 577,
-          "end_frame": 589
+          "start_s": 32.845,
+          "end_s": 33.245,
+          "start_frame": 985,
+          "end_frame": 997
         },
         {
           "text": "ganha",
-          "start_s": 19.725,
-          "end_s": 19.965,
-          "start_frame": 592,
-          "end_frame": 599
+          "start_s": 33.325,
+          "end_s": 33.565,
+          "start_frame": 1000,
+          "end_frame": 1007
         },
         {
           "text": "mais",
-          "start_s": 20.045,
-          "end_s": 20.205,
-          "start_frame": 601,
-          "end_frame": 606
+          "start_s": 33.645,
+          "end_s": 33.805,
+          "start_frame": 1009,
+          "end_frame": 1014
         },
         {
           "text": "organização,",
-          "start_s": 20.285,
-          "end_s": 21.245,
-          "start_frame": 609,
-          "end_frame": 637
+          "start_s": 33.885,
+          "end_s": 34.845,
+          "start_frame": 1017,
+          "end_frame": 1045
         },
         {
           "text": "agilidade",
-          "start_s": 21.325,
-          "end_s": 22.045,
-          "start_frame": 640,
-          "end_frame": 661
+          "start_s": 34.925,
+          "end_s": 35.645,
+          "start_frame": 1048,
+          "end_frame": 1069
         },
         {
           "text": "e",
-          "start_s": 22.125,
-          "end_s": 22.205,
-          "start_frame": 664,
-          "end_frame": 666
+          "start_s": 35.725,
+          "end_s": 35.805,
+          "start_frame": 1072,
+          "end_frame": 1074
         },
         {
           "text": "liberdade",
-          "start_s": 22.285,
-          "end_s": 23.005,
-          "start_frame": 669,
-          "end_frame": 690
+          "start_s": 35.885,
+          "end_s": 36.605,
+          "start_frame": 1077,
+          "end_frame": 1098
         },
         {
           "text": "para",
-          "start_s": 23.085,
-          "end_s": 23.245,
-          "start_frame": 693,
-          "end_frame": 697
+          "start_s": 36.685,
+          "end_s": 36.845,
+          "start_frame": 1101,
+          "end_frame": 1105
         },
         {
           "text": "crescer.",
-          "start_s": 23.285,
-          "end_s": 24.045,
-          "start_frame": 699,
-          "end_frame": 721
+          "start_s": 36.885,
+          "end_s": 37.645,
+          "start_frame": 1107,
+          "end_frame": 1129
         }
       ]
     },
@@ -399,80 +649,80 @@
       "id": "L5_projetos",
       "emotion_tags": "proud, natural",
       "text": "Da primeira ideia ao projeto no ar, cada detalhe importa.",
-      "start_s": 24.193,
-      "end_s": 27.645,
-      "start_frame": 726,
-      "end_frame": 829,
+      "start_s": 37.793,
+      "end_s": 41.245,
+      "start_frame": 1134,
+      "end_frame": 1237,
       "words": [
         {
           "text": "Da",
-          "start_s": 24.193,
-          "end_s": 24.205,
-          "start_frame": 726,
-          "end_frame": 726
+          "start_s": 37.793,
+          "end_s": 37.805,
+          "start_frame": 1134,
+          "end_frame": 1134
         },
         {
           "text": "primeira",
-          "start_s": 24.325,
-          "end_s": 24.525,
-          "start_frame": 730,
-          "end_frame": 736
+          "start_s": 37.925,
+          "end_s": 38.125,
+          "start_frame": 1138,
+          "end_frame": 1144
         },
         {
           "text": "ideia",
-          "start_s": 24.685,
-          "end_s": 24.925,
-          "start_frame": 741,
-          "end_frame": 748
+          "start_s": 38.285,
+          "end_s": 38.525,
+          "start_frame": 1149,
+          "end_frame": 1156
         },
         {
           "text": "ao",
-          "start_s": 25.005,
-          "end_s": 25.085,
-          "start_frame": 750,
-          "end_frame": 753
+          "start_s": 38.605,
+          "end_s": 38.685,
+          "start_frame": 1158,
+          "end_frame": 1161
         },
         {
           "text": "projeto",
-          "start_s": 25.205,
-          "end_s": 25.565,
-          "start_frame": 756,
-          "end_frame": 767
+          "start_s": 38.805,
+          "end_s": 39.165,
+          "start_frame": 1164,
+          "end_frame": 1175
         },
         {
           "text": "no",
-          "start_s": 25.605,
-          "end_s": 25.645,
-          "start_frame": 768,
-          "end_frame": 769
+          "start_s": 39.205,
+          "end_s": 39.245,
+          "start_frame": 1176,
+          "end_frame": 1177
         },
         {
           "text": "ar,",
-          "start_s": 25.725,
-          "end_s": 26.205,
-          "start_frame": 772,
-          "end_frame": 786
+          "start_s": 39.325,
+          "end_s": 39.805,
+          "start_frame": 1180,
+          "end_frame": 1194
         },
         {
           "text": "cada",
-          "start_s": 26.285,
-          "end_s": 26.525,
-          "start_frame": 789,
-          "end_frame": 796
+          "start_s": 39.885,
+          "end_s": 40.125,
+          "start_frame": 1197,
+          "end_frame": 1204
         },
         {
           "text": "detalhe",
-          "start_s": 26.605,
-          "end_s": 27.005,
-          "start_frame": 798,
-          "end_frame": 810
+          "start_s": 40.205,
+          "end_s": 40.605,
+          "start_frame": 1206,
+          "end_frame": 1218
         },
         {
           "text": "importa.",
-          "start_s": 27.245,
-          "end_s": 27.645,
-          "start_frame": 817,
-          "end_frame": 829
+          "start_s": 40.845,
+          "end_s": 41.245,
+          "start_frame": 1225,
+          "end_frame": 1237
         }
       ]
     },
@@ -480,38 +730,38 @@
       "id": "L6_assinatura",
       "emotion_tags": "deep, confident",
       "text": "ConectFly. Conecte. Automatize. Evolua.",
-      "start_s": 29.541,
-      "end_s": 34.138,
-      "start_frame": 886,
-      "end_frame": 1024,
+      "start_s": 43.141,
+      "end_s": 47.738,
+      "start_frame": 1294,
+      "end_frame": 1432,
       "words": [
         {
           "text": "ConectFly.",
-          "start_s": 29.541,
-          "end_s": 30.392,
-          "start_frame": 886,
-          "end_frame": 912
+          "start_s": 43.141,
+          "end_s": 43.992,
+          "start_frame": 1294,
+          "end_frame": 1320
         },
         {
           "text": "Conecte.",
-          "start_s": 30.925,
-          "end_s": 31.625,
-          "start_frame": 928,
-          "end_frame": 949
+          "start_s": 44.525,
+          "end_s": 45.225,
+          "start_frame": 1336,
+          "end_frame": 1357
         },
         {
           "text": "Automatize.",
-          "start_s": 32.045,
-          "end_s": 33.125,
-          "start_frame": 961,
-          "end_frame": 994
+          "start_s": 45.645,
+          "end_s": 46.725,
+          "start_frame": 1369,
+          "end_frame": 1402
         },
         {
           "text": "Evolua.",
-          "start_s": 33.405,
-          "end_s": 34.138,
-          "start_frame": 1002,
-          "end_frame": 1024
+          "start_s": 47.005,
+          "end_s": 47.738,
+          "start_frame": 1410,
+          "end_frame": 1432
         }
       ]
     },
@@ -519,59 +769,59 @@
       "id": "L7_encerramento",
       "emotion_tags": "warmly, cinematic finish",
       "text": "O futuro do seu negócio começa aqui.",
-      "start_s": 34.672,
-      "end_s": 37.325,
-      "start_frame": 1040,
-      "end_frame": 1120,
+      "start_s": 48.272,
+      "end_s": 50.84,
+      "start_frame": 1448,
+      "end_frame": 1525,
       "words": [
         {
           "text": "O",
-          "start_s": 34.672,
-          "end_s": 34.685,
-          "start_frame": 1040,
-          "end_frame": 1041
+          "start_s": 48.272,
+          "end_s": 48.285,
+          "start_frame": 1448,
+          "end_frame": 1449
         },
         {
           "text": "futuro",
-          "start_s": 34.765,
-          "end_s": 35.165,
-          "start_frame": 1043,
-          "end_frame": 1055
+          "start_s": 48.365,
+          "end_s": 48.765,
+          "start_frame": 1451,
+          "end_frame": 1463
         },
         {
           "text": "do",
-          "start_s": 35.245,
-          "end_s": 35.325,
-          "start_frame": 1057,
-          "end_frame": 1060
+          "start_s": 48.845,
+          "end_s": 48.925,
+          "start_frame": 1465,
+          "end_frame": 1468
         },
         {
           "text": "seu",
-          "start_s": 35.365,
-          "end_s": 35.485,
-          "start_frame": 1061,
-          "end_frame": 1065
+          "start_s": 48.965,
+          "end_s": 49.085,
+          "start_frame": 1469,
+          "end_frame": 1473
         },
         {
           "text": "negócio",
-          "start_s": 35.605,
-          "end_s": 36.045,
-          "start_frame": 1068,
-          "end_frame": 1081
+          "start_s": 49.205,
+          "end_s": 49.645,
+          "start_frame": 1476,
+          "end_frame": 1489
         },
         {
           "text": "começa",
-          "start_s": 36.205,
-          "end_s": 36.685,
-          "start_frame": 1086,
-          "end_frame": 1101
+          "start_s": 49.805,
+          "end_s": 50.285,
+          "start_frame": 1494,
+          "end_frame": 1509
         },
         {
           "text": "aqui.",
-          "start_s": 36.765,
-          "end_s": 37.325,
-          "start_frame": 1103,
-          "end_frame": 1120
+          "start_s": 50.365,
+          "end_s": 50.84,
+          "start_frame": 1511,
+          "end_frame": 1525
         }
       ]
     }
@@ -622,107 +872,191 @@
     "clientes": {
       "word": "clientes.",
       "start_s": 15.765,
-      "end_s": 16.445,
+      "end_s": 16.27,
       "start_frame": 473,
-      "end_frame": 493
+      "end_frame": 488
+    },
+    "crm_do": {
+      "word": "Do",
+      "start_s": 16.9,
+      "end_s": 16.98,
+      "start_frame": 507,
+      "end_frame": 509
+    },
+    "crm_simples": {
+      "word": "simples",
+      "start_s": 17.86,
+      "end_s": 18.42,
+      "start_frame": 536,
+      "end_frame": 553
+    },
+    "crm_completo": {
+      "word": "completo.",
+      "start_s": 19.58,
+      "end_s": 20.3,
+      "start_frame": 587,
+      "end_frame": 609
+    },
+    "crm": {
+      "word": "CRM",
+      "start_s": 20.82,
+      "end_s": 21.46,
+      "start_frame": 625,
+      "end_frame": 644
+    },
+    "crm_painel": {
+      "word": "painel",
+      "start_s": 21.7,
+      "end_s": 21.94,
+      "start_frame": 651,
+      "end_frame": 658
+    },
+    "crm_chat": {
+      "word": "chat",
+      "start_s": 23.22,
+      "end_s": 23.38,
+      "start_frame": 697,
+      "end_frame": 701
+    },
+    "crm_pedidos": {
+      "word": "pedidos,",
+      "start_s": 24.26,
+      "end_s": 24.82,
+      "start_frame": 728,
+      "end_frame": 745
+    },
+    "crm_encomendas": {
+      "word": "encomendas",
+      "start_s": 24.9,
+      "end_s": 25.54,
+      "start_frame": 747,
+      "end_frame": 766
+    },
+    "crm_campanhas": {
+      "word": "campanhas",
+      "start_s": 25.74,
+      "end_s": 26.18,
+      "start_frame": 772,
+      "end_frame": 785
+    },
+    "crm_whatsapp": {
+      "word": "WhatsApp...",
+      "start_s": 26.54,
+      "end_s": 27.22,
+      "start_frame": 796,
+      "end_frame": 817
+    },
+    "crm_integrado": {
+      "word": "integrado,",
+      "start_s": 27.66,
+      "end_s": 28.26,
+      "start_frame": 830,
+      "end_frame": 848
+    },
+    "crm_lugar": {
+      "word": "lugar.",
+      "start_s": 28.9,
+      "end_s": 29.42,
+      "start_frame": 867,
+      "end_frame": 883
     },
     "inteligencia_artificial": {
       "word": "inteligência",
-      "start_s": 16.605,
-      "end_s": 17.165,
-      "start_frame": 498,
-      "end_frame": 515
+      "start_s": 30.205,
+      "end_s": 30.765,
+      "start_frame": 906,
+      "end_frame": 923
     },
     "automacoes": {
       "word": "automações,",
-      "start_s": 18.085,
-      "end_s": 19.005,
-      "start_frame": 543,
-      "end_frame": 570
+      "start_s": 31.685,
+      "end_s": 32.605,
+      "start_frame": 951,
+      "end_frame": 978
     },
     "organizacao": {
       "word": "organização,",
-      "start_s": 20.285,
-      "end_s": 21.245,
-      "start_frame": 609,
-      "end_frame": 637
+      "start_s": 33.885,
+      "end_s": 34.845,
+      "start_frame": 1017,
+      "end_frame": 1045
     },
     "agilidade": {
       "word": "agilidade",
-      "start_s": 21.325,
-      "end_s": 22.045,
-      "start_frame": 640,
-      "end_frame": 661
+      "start_s": 34.925,
+      "end_s": 35.645,
+      "start_frame": 1048,
+      "end_frame": 1069
     },
     "liberdade": {
       "word": "liberdade",
-      "start_s": 22.285,
-      "end_s": 23.005,
-      "start_frame": 669,
-      "end_frame": 690
+      "start_s": 35.885,
+      "end_s": 36.605,
+      "start_frame": 1077,
+      "end_frame": 1098
     },
     "primeira_ideia": {
       "word": "primeira",
-      "start_s": 24.325,
-      "end_s": 24.525,
-      "start_frame": 730,
-      "end_frame": 736
+      "start_s": 37.925,
+      "end_s": 38.125,
+      "start_frame": 1138,
+      "end_frame": 1144
     },
     "projeto_no_ar": {
       "word": "projeto",
-      "start_s": 25.205,
-      "end_s": 25.565,
-      "start_frame": 756,
-      "end_frame": 767
+      "start_s": 38.805,
+      "end_s": 39.165,
+      "start_frame": 1164,
+      "end_frame": 1175
     },
     "detalhe": {
       "word": "detalhe",
-      "start_s": 26.605,
-      "end_s": 27.005,
-      "start_frame": 798,
-      "end_frame": 810
+      "start_s": 40.205,
+      "end_s": 40.605,
+      "start_frame": 1206,
+      "end_frame": 1218
     },
     "conectfly_2": {
       "word": "ConectFly.",
-      "start_s": 29.541,
-      "end_s": 30.392,
-      "start_frame": 886,
-      "end_frame": 912
+      "start_s": 43.141,
+      "end_s": 43.992,
+      "start_frame": 1294,
+      "end_frame": 1320
     },
     "conecte": {
       "word": "Conecte.",
-      "start_s": 30.925,
-      "end_s": 31.625,
-      "start_frame": 928,
-      "end_frame": 949
+      "start_s": 44.525,
+      "end_s": 45.225,
+      "start_frame": 1336,
+      "end_frame": 1357
     },
     "automatize": {
       "word": "Automatize.",
-      "start_s": 32.045,
-      "end_s": 33.125,
-      "start_frame": 961,
-      "end_frame": 994
+      "start_s": 45.645,
+      "end_s": 46.725,
+      "start_frame": 1369,
+      "end_frame": 1402
     },
     "evolua": {
       "word": "Evolua.",
-      "start_s": 33.405,
-      "end_s": 34.138,
-      "start_frame": 1002,
-      "end_frame": 1024
+      "start_s": 47.005,
+      "end_s": 47.738,
+      "start_frame": 1410,
+      "end_frame": 1432
     },
     "futuro": {
       "word": "futuro",
-      "start_s": 34.765,
-      "end_s": 35.165,
-      "start_frame": 1043,
-      "end_frame": 1055
+      "start_s": 48.365,
+      "end_s": 48.765,
+      "start_frame": 1451,
+      "end_frame": 1463
     },
     "aqui": {
       "word": "aqui.",
-      "start_s": 36.765,
-      "end_s": 37.325,
-      "start_frame": 1103,
-      "end_frame": 1120
+      "start_s": 50.365,
+      "end_s": 50.84,
+      "start_frame": 1511,
+      "end_frame": 1525
     }
   }
 }

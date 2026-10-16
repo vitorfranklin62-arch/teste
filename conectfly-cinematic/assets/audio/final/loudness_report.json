@@ -1,35 +1,35 @@
 [
   {
     "file": "conectfly_voice_only.wav",
-    "lufs_i": -14.24,
-    "true_peak_dbtp": 2.0,
-    "sample_peak_dbfs": 1.99,
-    "duration_s": 40.0
+    "lufs_i": -14.19,
+    "true_peak_dbtp": 1.89,
+    "sample_peak_dbfs": 1.88,
+    "duration_s": 54.0
   },
   {
     "file": "conectfly_music_only.wav",
-    "lufs_i": -24.57,
-    "true_peak_dbtp": -12.85,
-    "sample_peak_dbfs": -12.85,
-    "duration_s": 40.0
+    "lufs_i": -25.05,
+    "true_peak_dbtp": -12.31,
+    "sample_peak_dbfs": -12.96,
+    "duration_s": 54.0
   },
   {
     "file": "conectfly_sfx_only.wav",
-    "lufs_i": -20.75,
-    "true_peak_dbtp": -4.81,
-    "sample_peak_dbfs": -5.17,
-    "duration_s": 40.0
+    "lufs_i": -21.48,
+    "true_peak_dbtp": -4.92,
+    "sample_peak_dbfs": -5.28,
+    "duration_s": 54.0
   },
   {
     "file": "conectfly_final_mix.wav",
-    "lufs_i": -14.15,
+    "lufs_i": -14.13,
     "true_peak_dbtp": -1.2,
     "sample_peak_dbfs": -1.21,
-    "duration_s": 40.0
+    "duration_s": 54.0
   },
   {
     "file": "conectfly_15s_final_mix.wav",
-    "lufs_i": -14.06,
+    "lufs_i": -14.05,
     "true_peak_dbtp": -1.2,
     "sample_peak_dbfs": -1.21,
     "duration_s": 15.0

@@ -20,7 +20,8 @@ OUT = "assets/audio/final"
 TL = json.load(open("narration-timeline.json"))
 CUT = json.load(open("src/data/cut15.json"))
 M = {k: v["start_s"] for k, v in TL["markers"].items()}
-VO = TL["voice_offset_s"]
+S = {x["id"]: (x["start_s"], x["end_s"]) for x in TL["sentences"]}
+DUR = TL["video_duration_s"]
 
 
 def load(path, mono=True):
@@ -137,15 +138,25 @@ SFX = {k: load(f"assets/audio/sfx_src/{k}.mp3") for k in [
     "sfx01_energy_awakening", "sfx02_digital_portal", "sfx03_interface_transition",
     "sfx04_artificial_intelligence", "sfx05_connection_network", "sfx06_brand_reveal"]}
 SFX = {k: fade(v) for k, v in SFX.items()}
-VOICE_SRC = load("assets/audio/source/narration_original.mp3")
+# Takes de locução ElevenLabs v4 (mesma voz/modelo), montados por segmentos em pausas naturais.
+TAKES = {k: load(v["audio"]) for k, v in TL["sources"].items()}
 
 
-def build(duration, voice_parts, music_path, sfx_events, music_gain_db=-6.5, sfx_gain_db=-10.0):
+def assemble(segments, chain=True):
+    """Voz montada a partir dos segmentos (sem time-stretch). chain=False → narração crua."""
+    n = int(max(s["at"] + s["src_end"] - s["src_start"] for s in segments) * SR) + SR
+    v = np.zeros((2, n))
+    for s in segments:
+        a, b = int(s["src_start"] * SR), int(s["src_end"] * SR)
+        x = TAKES[s["src"]][a:b]
+        place(v, fade(voice_chain(x) if chain else x, 0.01, 0.06), s["at"])
+    return v
+
+
+def build(duration, segments, music_path, sfx_events, music_gain_db=-6.5, sfx_gain_db=-10.0):
     n = int(duration * SR)
-    voice = np.zeros((2, n))
-    for seg, at in voice_parts:
-        a, b = int(seg[0] * SR), int(seg[1] * SR)
-        place(voice, fade(voice_chain(VOICE_SRC[a:b]), 0.01, 0.06), at)
+    voice = assemble(segments)[:, :n]
+    voice = np.pad(voice, ((0, 0), (0, n - voice.shape[1])))
     music = load(music_path, mono=False)[:, :n]
     music = np.pad(music, ((0, 0), (0, n - music.shape[1])))
     duck = duck_gain(voice.mean(0))
@@ -163,13 +174,22 @@ if __name__ == "__main__":
     os.makedirs(f"{OUT}/conectfly_sfx", exist_ok=True)
     reports = []
 
-    # ---- corte principal 40 s ----
-    ev40 = [
+    # ---- corte principal (54 s) ----
+    ev = [
         ("sfx01_energy_awakening", 0.25, 0, 0, 0),
         ("sfx02_digital_portal", M["conectfly_1"] - 1.25, -1, 0, 0),
         ("sfx03_interface_transition", M["sites"] - 0.5, -2, -0.3, 0),
         ("sfx03_interface_transition", M["sistemas"] - 0.15, -3, 0.3, 2),
         ("sfx03_interface_transition", M["experiencias"] - 0.15, -3, -0.2, -2),
+        # CRM — do simples ao complexo: cada módulo entra com um "clique" de interface, subindo de tom
+        ("sfx03_interface_transition", M["crm_do"] - 0.2, -4, 0, -2),
+        ("sfx05_connection_network", M["crm_completo"] - 0.05, -4, 0, 0),
+        ("sfx06_brand_reveal", M["crm"] - 0.05, -3, 0, 2),
+        ("sfx03_interface_transition", M["crm_chat"] - 0.1, -4, -0.3, 0),
+        ("sfx03_interface_transition", M["crm_pedidos"] - 0.1, -4, 0.3, 1),
+        ("sfx03_interface_transition", M["crm_encomendas"] - 0.1, -4, -0.3, 2),
+        ("sfx03_interface_transition", M["crm_campanhas"] - 0.1, -4, 0.3, 3),
+        ("sfx05_connection_network", M["crm_integrado"] - 0.05, -2, 0, 2),
         ("sfx04_artificial_intelligence", M["inteligencia_artificial"] - 0.1, -2, 0, 0),
         ("sfx04_artificial_intelligence", M["automacoes"] + 0.1, -5, 0.25, 3),
         ("sfx05_connection_network", M["organizacao"], -8, -0.3, 0),
@@ -177,19 +197,18 @@ if __name__ == "__main__":
         ("sfx05_connection_network", M["liberdade"], -8, 0, 4),
         ("sfx03_interface_transition", M["primeira_ideia"] - 0.25, -2, 0, 0),
         ("sfx03_interface_transition", M["projeto_no_ar"] - 0.1, -5, 0.3, 2),
-        ("sfx02_digital_portal", 27.95, -5, 0, -3),  # projetos viram partículas
+        ("sfx02_digital_portal", S["L5_projetos"][1] + 0.3, -5, 0, -3),  # projetos viram partículas
         ("sfx06_brand_reveal", M["conectfly_2"] - 0.05, 0, 0, 0),
         ("sfx05_connection_network", M["conecte"] - 0.04, -1, -0.15, 0),
         ("sfx05_connection_network", M["automatize"] - 0.04, -1, 0.15, 2),
         ("sfx05_connection_network", M["evolua"] - 0.04, -1, 0, 4),
         ("sfx06_brand_reveal", M["aqui"] + 0.55, 0, 0, -2),  # logo final + assinatura
     ]
-    voice40 = [((0.0, 36.64), VO)]
-    st = build(40.0, voice40, "assets/audio/stems/music_40s.wav", ev40)
+    st = build(DUR, TL["segments"], "assets/audio/stems/music_main.wav", ev)
     st, mix = master(st)
     write("conectfly_voice_only.wav", st["voice"], "FLOAT")  # pré-limitador: float evita clipping
-    write("conectfly_music_only.wav", st["music"], "FLOAT")  # pré-limitador: float evita clipping
-    write("conectfly_sfx_only.wav", st["sfx"], "FLOAT")  # pré-limitador: float evita clipping
+    write("conectfly_music_only.wav", st["music"], "FLOAT")
+    write("conectfly_sfx_only.wav", st["sfx"], "FLOAT")
     write("conectfly_final_mix.wav", mix)
     reports += [report(k, v) for k, v in [("conectfly_voice_only.wav", st["voice"]), ("conectfly_music_only.wav", st["music"]),
                                           ("conectfly_sfx_only.wav", st["sfx"]), ("conectfly_final_mix.wav", mix)]]
@@ -208,19 +227,19 @@ if __name__ == "__main__":
         ("sfx05_connection_network", k["evolua"] - 0.04, -1, 0, 4),
         ("sfx06_brand_reveal", k["aqui_end"] - 0.15, 0, 0, -2),
     ]
-    voice15 = [((s["src_start"], s["src_end"]), s["at"]) for s in CUT["segments"]]
-    st15 = build(15.0, voice15, "assets/audio/stems/music_15s.wav", ev15)
+    st15 = build(15.0, CUT["segments"], "assets/audio/stems/music_15s.wav", ev15)
     st15, mix15 = master(st15)
     write("conectfly_15s_final_mix.wav", mix15)
     reports.append(report("conectfly_15s_final_mix.wav", mix15))
 
     # ---- entregáveis de áudio "brutos" ----
-    sf.write(f"{OUT}/conectfly_narration.wav", VOICE_SRC.astype(np.float32), SR, subtype="PCM_24")
-    music_raw = load("assets/audio/stems/music_40s.wav", mono=False)
+    narr = assemble(TL["segments"], chain=False)[:, : int(DUR * SR)].mean(0)  # narração editada, sem processamento
+    sf.write(f"{OUT}/conectfly_narration.wav", narr.astype(np.float32), SR, subtype="PCM_24")
+    music_raw = load("assets/audio/stems/music_main.wav", mono=False)
     sf.write(f"{OUT}/conectfly_soundtrack.wav", music_raw.T.astype(np.float32), SR, subtype="PCM_24")
     for name, x in SFX.items():
         sf.write(f"{OUT}/conectfly_sfx/{name}.wav", x.astype(np.float32), SR, subtype="PCM_24")
 
     json.dump(reports, open(f"{OUT}/loudness_report.json", "w"), indent=2)
     for r in reports:
-        print(r)
+        print({kk: (float(vv) if not isinstance(vv, str) else vv) for kk, vv in r.items()})

@@ -9,7 +9,7 @@ registrando a origem": esta é 100% original, gerada deterministicamente por est
 Tonalidade Ré menor, 96 BPM. As seções são posicionadas nos tempos reais da narração
 (narration-timeline.json), não em tempos estimados.
 
-Uso: python3 scripts/soundtrack.py   ->  assets/audio/stems/music_40s.wav, music_15s.wav
+Uso: python3 scripts/soundtrack.py   ->  assets/audio/stems/music_main.wav (54 s), music_15s.wav
 """
 import json
 import numpy as np
@@ -241,57 +241,87 @@ def chord_bed(seq, tr, pad_g=0.5, sub_g=0.16, cutoff=1800):
         tr.add(sub(ROOT[name], t1 - t0), t0, gain=sub_g)
 
 
-# ---------------- arranjo 40 s ----------------
+# ---------------- arranjo principal (54 s) ----------------
+# Todas as seções são derivadas dos marcadores da narração (nenhum tempo fixo).
+S = {s["id"]: (s["start_s"], s["end_s"]) for s in TL["sentences"]}
+DUR = TL["video_duration_s"]
 
-def build_40():
-    tr = Track(40.0)
-    # 0–5.2  mistério: drone grave + brilho, quase silêncio no início
-    tr.add(sub(38, 5.0, attack=2.5), 0.4, gain=0.12)
-    tr.add(pad([50, 57, 62], 5.0, cutoff=600, attack=2.5), 0.3, gain=0.45)
-    tr.add(shimmer(4.8), 0.5, gain=0.12)
+
+def cycle(names, a, b, tr, bar=BEAT * 4, pad_g=0.5, sub_g=0.16, cutoff=2400, arp=None, arp_bright=3800):
+    """Preenche [a, b) com acordes em ciclo, um por compasso (o último absorve a sobra)."""
+    t, i = a, 0
+    while t < b - 0.05:
+        e = min(b, t + bar)
+        if b - e < bar * 0.5:
+            e = b
+        n = names[i % len(names)]
+        chord_bed([(n, t, e, cutoff)], tr, pad_g=pad_g, sub_g=sub_g)
+        if arp:
+            arp_pattern(n, t, e, tr, gain=arp, bright=arp_bright)
+        t, i = e, i + 1
+
+
+def build_main():
+    tr = Track(DUR)
+    L3a, L3b = S["L3_servicos"]
+    C0, C1 = S["L3b_crm"]
+    I0, I1 = S["L4_ia"]
+    P0, P1 = S["L5_projetos"]
+    # 1 · mistério: drone + brilho
+    tr.add(sub(38, M["conectfly_1"], attack=2.5), 0.4, gain=0.12)
+    tr.add(pad([50, 57, 62], M["conectfly_1"] - 0.3, cutoff=600, attack=2.5), 0.3, gain=0.45)
+    tr.add(shimmer(M["conectfly_1"] - 0.6), 0.5, gain=0.12)
     tr.add(riser(2.0, 200, 5000), M["conectfly_1"] - 2.0, gain=0.10)
-    # 5.2–9.8  expansão do universo digital
-    chord_bed([("Bb", 5.2, 7.6, 1400), ("F", 7.6, 9.9, 1900)], tr, pad_g=0.55)
+    # 2 · expansão do universo
     tr.add(impact(38, 2.0), M["conectfly_1"] - 0.05, gain=0.108)
-    arp_pattern("Bb", 6.4, 7.6, tr, gain=0.07, bright=1800)
-    arp_pattern("F", 7.6, 9.9, tr, gain=0.09, bright=2200)
-    # 9.9–16.5  ritmo moderno (sites / sistemas)
-    chord_bed([("C", 9.9, 12.4), ("Dm", 12.4, 14.9), ("Bb", 14.9, 16.5)], tr, pad_g=0.45, cutoff=2300)
-    arp_pattern("C", 9.9, 12.4, tr, gain=0.13)
-    arp_pattern("Dm", 12.4, 14.9, tr, gain=0.13)
-    arp_pattern("Bb", 14.9, 16.5, tr, gain=0.13)
-    drums(9.9, 16.4, tr, half=True)
-    # 16.5–24.1  IA: progressão e descoberta
-    chord_bed([("Gm", 16.5, 18.9, 2400), ("Bb", 18.9, 21.4, 2800), ("F", 21.4, 23.0, 3200), ("C", 23.0, 24.2, 3400)], tr, pad_g=0.48)
-    for name, a, b in [("Gm", 16.5, 18.9), ("Bb", 18.9, 21.4), ("F", 21.4, 23.0), ("C", 23.0, 24.2)]:
-        arp_pattern(name, a, b, tr, gain=0.14, bright=4200)
-    drums(16.5, 24.0, tr)
-    tr.add(riser(1.4, 400, 8000), 22.7, gain=0.07)
-    # 24.1–27.7  projetos reais: pico emocional moderado
-    chord_bed([("Dm", 24.1, 26.0, 3600), ("Bb", 26.0, 27.8, 3600)], tr, pad_g=0.55)
-    tr.add(bell(74, 2.5), 24.15, gain=0.10, pan=-0.2)
-    tr.add(bell(77, 2.5), 25.25, gain=0.08, pan=0.2)
-    tr.add(bell(81, 2.5), 26.6, gain=0.08)
-    arp_pattern("Dm", 24.1, 26.0, tr, gain=0.14, bright=4500)
-    arp_pattern("Bb", 26.0, 27.6, tr, gain=0.14, bright=4500)
-    drums(24.1, 27.5, tr, kick_g=0.36)
-    # 27.7–29.5  respiro (long pause) + riser para a assinatura
-    tr.add(pad(CH["C"], 1.8, cutoff=900), 27.7, gain=0.4)
+    cycle(["Bb", "F"], M["conectfly_1"] - 0.2, L3a, tr, pad_g=0.55, cutoff=1700, arp=0.08, arp_bright=2000)
+    # 3 · ritmo moderno (sites · sistemas · clientes)
+    cycle(["C", "Dm", "Bb"], L3a, C0 - 0.3, tr, pad_g=0.45, cutoff=2300, arp=0.13)
+    drums(L3a, C0 - 0.45, tr, half=True)
+    # 4 · CRM — "do simples ao complexo": começa com UMA nota e ganha camadas até o groove completo
+    simple_end = M["crm_completo"]
+    t, k = C0 - 0.3, 0
+    while t < simple_end:  # simples: nota única, pulsando a cada colcheia
+        tr.add(pluck(74 if k % 4 else 81, bright=2600), t, gain=0.12, pan=0.25 * (-1) ** k)
+        t, k = t + BEAT / 2, k + 1
+    tr.add(pad([50, 57, 62], simple_end - C0 + 0.3, cutoff=900, attack=0.8), C0 - 0.3, gain=0.3)
+    tr.add(riser(M["crm"] - simple_end, 300, 7000), simple_end, gain=0.09)
+    cycle(["Dm"], simple_end, M["crm"], tr, pad_g=0.5, cutoff=2200, arp=0.12, arp_bright=3600)  # completo: harmonia + arpejo
+    tr.add(impact(36, 2.2), M["crm"] - 0.03, gain=0.14)  # "CRM": entra o groove inteiro
+    cycle(["Bb", "F", "C", "Gm"], M["crm"], M["crm_integrado"], tr, pad_g=0.5, sub_g=0.18, cutoff=3000, arp=0.14, arp_bright=4600)
+    drums(M["crm"], M["crm_integrado"] - 0.1, tr, kick_g=0.34)
+    for key in ("crm_chat", "crm_pedidos", "crm_encomendas", "crm_campanhas"):
+        tr.add(bell(86, 1.2), M[key], gain=0.05, pan=0.3)
+    tr.add(pad(CH["Dsus"], C1 - M["crm_integrado"] + 0.4, cutoff=3600, attack=0.3), M["crm_integrado"], gain=0.5)  # tudo integrado: acorde aberto
+    tr.add(impact(38, 2.0), M["crm_integrado"] - 0.03, gain=0.11)
+    tr.add(riser(I0 - C1 + 0.2, 400, 8000), C1 - 0.2, gain=0.08)
+    # 5 · IA: progressão e descoberta
+    cycle(["Gm", "Bb", "F", "C"], I0 - 0.1, I1 + 0.15, tr, pad_g=0.48, cutoff=3000, arp=0.14, arp_bright=4200)
+    drums(I0 - 0.1, I1, tr)
+    tr.add(riser(1.4, 400, 8000), I1 - 1.3, gain=0.07)
+    # 6 · projetos reais: pico emocional moderado
+    cycle(["Dm", "Bb"], P0 - 0.1, P1 + 0.3, tr, pad_g=0.55, cutoff=3600, arp=0.14, arp_bright=4500)
+    for key, m in (("primeira_ideia", 74), ("projeto_no_ar", 77), ("detalhe", 81)):
+        tr.add(bell(m, 2.5), M[key], gain=0.09)
+    drums(P0 - 0.1, P1 + 0.2, tr, kick_g=0.36)
+    # respiro + riser para a assinatura
+    tr.add(pad(CH["C"], M["conectfly_2"] - P1 - 0.3, cutoff=900), P1 + 0.3, gain=0.4)
     tr.add(riser(1.8, 250, 9000), M["conectfly_2"] - 1.8, gain=0.13)
-    # 29.5–34.6  CONECTE · AUTOMATIZE · EVOLUA — crescimento emocional
-    chord_bed([("Dm", 29.5, 30.9, 3000), ("Bb", 30.9, 32.0, 3400), ("F", 32.0, 33.4, 3800), ("C", 33.4, 34.6, 4200)], tr, pad_g=0.6, sub_g=0.2)
+    # 7 · Conecte · Automatize · Evolua — crescimento emocional
+    seq = [("Dm", M["conectfly_2"] - 0.05, M["conecte"]), ("Bb", M["conecte"], M["automatize"]), ("F", M["automatize"], M["evolua"]), ("C", M["evolua"], M["futuro"] - 0.3)]
+    chord_bed([(n, a, b, 3000 + 400 * i) for i, (n, a, b) in enumerate(seq)], tr, pad_g=0.6, sub_g=0.2)
     for key in ("conectfly_2", "conecte", "automatize", "evolua"):
         tr.add(impact(36 if key == "conectfly_2" else 38, 2.0), M[key] - 0.03, gain=0.132 if key == "conectfly_2" else 0.090)
-    arp_pattern("F", 32.0, 33.4, tr, gain=0.10, bright=5000)
-    arp_pattern("C", 33.4, 34.6, tr, gain=0.11, bright=5000)
-    # 34.6–40  encerramento marcante: resolve em Ré (sus → maior), assinatura de sino
-    chord_bed([("Bb", 34.6, 36.3, 2600), ("Dsus", 36.3, 39.0, 2200)], tr, pad_g=0.5, sub_g=0.16)
-    tr.add(pad([50, 54, 57, 62, 66], 2.8, cutoff=2400, attack=0.6, release=2.0), 37.1, gain=0.45)  # Ré maior (luz)
+    arp_pattern("F", M["automatize"], M["evolua"], tr, gain=0.10, bright=5000)
+    arp_pattern("C", M["evolua"], M["futuro"] - 0.3, tr, gain=0.11, bright=5000)
+    # 8 · encerramento: resolve em Ré (sus → maior) + assinatura de sino
+    chord_bed([("Bb", M["futuro"] - 0.3, M["aqui"] - 0.1, 2600), ("Dsus", M["aqui"] - 0.1, DUR - 1.0, 2200)], tr, pad_g=0.5, sub_g=0.16)
+    tr.add(pad([50, 54, 57, 62, 66], DUR - M["aqui"] - 1.8, cutoff=2400, attack=0.6, release=2.0), M["aqui"] + 0.7, gain=0.45)
     tr.add(impact(38, 3.0), M["aqui"] + 0.55, gain=0.120)
-    for i, m in enumerate([74, 81, 78, 86]):  # D – A – F# – D: assinatura sonora curta
+    for i, m in enumerate([74, 81, 78, 86]):  # Ré – Lá – Fá# – Ré
         tr.add(bell(m, 3.0), M["aqui"] + 0.55 + i * 0.16, gain=0.11, pan=(-0.3, 0.3, -0.1, 0.1)[i])
     st = with_reverb(tr.stereo(), wet=0.32)
-    return master(st, fade_out=(38.2, 40.0))
+    return master(st, fade_out=(DUR - 1.8, DUR))
 
 
 # ---------------- arranjo 15 s (corte próprio) ----------------
@@ -338,9 +368,9 @@ def master(st, fade_out):
 if __name__ == "__main__":
     import os
     os.makedirs("assets/audio/stems", exist_ok=True)
-    m40 = build_40()
-    sf.write("assets/audio/stems/music_40s.wav", m40.T.astype(np.float32), SR, subtype="FLOAT")
+    mm = build_main()
+    sf.write("assets/audio/stems/music_main.wav", mm.T.astype(np.float32), SR, subtype="FLOAT")
     cut = json.load(open("src/data/cut15.json"))
     m15 = build_15(cut["markers"])
     sf.write("assets/audio/stems/music_15s.wav", m15.T.astype(np.float32), SR, subtype="FLOAT")
-    print("ok", m40.shape, m15.shape)
+    print("ok", mm.shape, m15.shape)

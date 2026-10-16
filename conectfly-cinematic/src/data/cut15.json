@@ -3,11 +3,13 @@
   "fps": 30,
   "segments": [
     {
+      "src": "main",
       "src_start": 0,
       "src_end": 4.053,
       "at": 0.5
     },
     {
+      "src": "main",
       "src_start": 28.801,
       "src_end": 36.845,
       "at": 6.4

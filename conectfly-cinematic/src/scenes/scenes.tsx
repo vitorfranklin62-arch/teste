@@ -1,6 +1,5 @@
 import React from "react";
 import { AbsoluteFill, interpolate } from "remotion";
-import caps from "../data/captures.json";
 import { BRAND_GRADIENT, C, CTA } from "../lib/brand";
 import { BODY, DISPLAY } from "../lib/fonts";
 import { cine, inOut, lerp, prog, win } from "../lib/time";
@@ -8,7 +7,9 @@ import { Chip, Glass, Icons, Kicker, Kinetic, Laptop, Phone, ScrollShot, useLayo
 
 const DESK_SCROLL = { src: "captures/farmacia_site_desktop_scroll.jpg", srcWidth: 1920, srcHeight: 3600, contentHeight: 1750 };
 const MOB_SCROLL = { src: "captures/farmacia_site_mobile_scroll.jpg", srcWidth: 780, srcHeight: 5200, contentHeight: 2600 };
-const CRM_DESK = { src: "captures/crm_farmacia_login_desktop.png", srcWidth: caps["crm_farmacia_login_desktop.png"].w, srcHeight: caps["crm_farmacia_login_desktop.png"].h };
+// Telas reais do CRM (prints do cliente com dados pessoais desfocados — scripts/redact_crm.py)
+const CRM_DESK = { src: "captures/crm_real/crm_dashboard.png", srcWidth: 1424, srcHeight: 832 };
+const CRM_CHAT = { src: "captures/crm_real/crm_chat.png", srcWidth: 1424, srcHeight: 832 };
 
 /** Flash de luz (corte por energia). */
 export const Flash: React.FC<{ at: number; dur?: number; color?: string; max?: number }> = ({ at, dur = 0.5, color = "#ffffff", max = 0.85 }) => {
@@ -112,7 +113,7 @@ export const SceneServices: React.FC<{ a: number; sites: number; sistemas: numbe
             <span style={{ width: 12, height: 12, borderRadius: 9, background: "#ff5f57" }} />
             <span style={{ width: 12, height: 12, borderRadius: 9, background: "#febc2e" }} />
             <span style={{ width: 12, height: 12, borderRadius: 9, background: "#28c840" }} />
-            <span style={{ marginLeft: 16 }}>CRM Farmácia Preço Bom — painel de atendimento</span>
+            <span style={{ marginLeft: 16 }}>CRM Farmácia Preço Bom — Dashboard</span>
           </div>
           <ScrollShot src={CRM_DESK.src} srcWidth={CRM_DESK.srcWidth} srcHeight={CRM_DESK.srcHeight} w={sysW} h={sysH - 44} scroll={0} />
         </Glass>
@@ -252,7 +253,7 @@ export const SceneShowroom: React.FC<{ a: number; enters: [number, number, numbe
   const deskW = L.vertical ? 880 : 1000;
   const deskH = deskW * 0.625;
   const crmW = L.vertical ? 520 : 560;
-  const crmH = crmW * 0.625;
+  const crmH = crmW * (832 / 1424);
   const phW = L.vertical ? 260 : 250;
 
   const desk = L.vertical ? { x: L.W / 2 - deskW / 2, y: 490 } : { x: L.W * 0.1, y: L.H * 0.24 };
@@ -269,9 +270,9 @@ export const SceneShowroom: React.FC<{ a: number; enters: [number, number, numbe
         {label("Farmácia Preço Bom — site", k1, { left: desk.x + 8, top: desk.y + deskH + 18 })}
 
         <Glass radius={20} glow={C.violet} style={{ left: crm.x, top: crm.y + (1 - k3) * 80, width: crmW, height: crmH, transform: `translateZ(${(1 - k3) * -400 + 120}px)`, ...item(k3) }}>
-          <ScrollShot src={CRM_DESK.src} srcWidth={CRM_DESK.srcWidth} srcHeight={CRM_DESK.srcHeight} w={crmW} h={crmH} scroll={0} />
+          <ScrollShot src={CRM_CHAT.src} srcWidth={CRM_CHAT.srcWidth} srcHeight={CRM_CHAT.srcHeight} w={crmW} h={crmH} scroll={0} />
         </Glass>
-        {label("CRM Farmácia Preço Bom", k3, { left: crm.x + 8, top: crm.y + crmH + 16 })}
+        {label("CRM Farmácia Preço Bom — chat ao vivo", k3, { left: crm.x + 8, top: crm.y + crmH + 16 })}
 
         <Phone w={phW} style={{ left: ph.x, top: ph.y + (1 - k2) * 80, transform: `translateZ(${(1 - k2) * -400 + 220}px) rotateY(-10deg)`, ...item(k2) }}>
           <ScrollShot {...MOB_SCROLL} w={phW * 0.92} h={phW * 0.92 * 2.16} scroll={prog(t, enters[1], out, inOut) * 0.5} />
@@ -373,8 +374,8 @@ export const SceneMontage: React.FC<{ a: number; b: number }> = ({ a, b }) => {
         </Laptop>
       ) : null}
       {parts[1].k > 0 ? (
-        <Glass radius={24} glow={C.violet} style={{ left: L.W / 2 - crmW / 2, top: L.vertical ? L.H * 0.38 : L.H * 0.3, width: crmW, height: crmW * 0.625, opacity: parts[1].k, transform: `scale(${0.92 + 0.1 * prog(t, a + seg, a + 2 * seg)})` }}>
-          <ScrollShot src={CRM_DESK.src} srcWidth={CRM_DESK.srcWidth} srcHeight={CRM_DESK.srcHeight} w={crmW} h={crmW * 0.625} scroll={0} />
+        <Glass radius={24} glow={C.violet} style={{ left: L.W / 2 - crmW / 2, top: L.vertical ? L.H * 0.38 : L.H * 0.3, width: crmW, height: crmW * (832 / 1424), opacity: parts[1].k, transform: `scale(${0.92 + 0.1 * prog(t, a + seg, a + 2 * seg)})` }}>
+          <ScrollShot src={CRM_DESK.src} srcWidth={CRM_DESK.srcWidth} srcHeight={CRM_DESK.srcHeight} w={crmW} h={crmW * (832 / 1424)} scroll={0} />
         </Glass>
       ) : null}
       {parts.map((p, i) =>
